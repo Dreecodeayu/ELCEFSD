@@ -2,28 +2,36 @@ import fs from "fs/promises";
 
 const asyncwrite = async ()=>{
     try{
-       await fs.writeFile("./data.csv","This is async file");
+       await fs.writeFile("./dataasync.csv","This is async file");
        console.log("File has been written successfully")
     }catch(error){
        console.log("unable to write file",error);
     }
 }
 
-asyncwrite();
+//asyncwrite();
 
-const asyncread = async ()=>{
-    try{
-        await fs.readFile("./data.csv","utf-8");
-    }catch(error){
-        console.log("unable to read file",error);
-    }
+const asyncread = async()=>{
+    const FileData = await fs.readFile("./dataasync.csv","utf-8");
+    return FileData;
 }
-asyncread();
-const asyncappend = async ()=>{
-    try{
-        await fs.appendFile("./data.csv","This is async file modified");
-    }catch(error){
-        console.log("unable to append file",error);
-    }
-}
-asyncappend();
+
+const data = await asyncread();
+console.log(data);
+
+// const asyncread = async ()=>{
+//     try{
+//         await fs.readFile("./datasync.csv","utf-8");
+//     }catch(error){
+//         console.log("unable to read file",error);
+//     }
+// }
+// asyncread();
+// const asyncappend = async ()=>{
+//     try{
+//         await fs.appendFile("./datasync.csv","\nThis is async file modified");
+//     }catch(error){
+//         console.log("unable to append file",error);
+//     }
+// }
+// asyncappend();
