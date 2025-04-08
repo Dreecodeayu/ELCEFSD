@@ -12,9 +12,16 @@ const asyncwrite = async ()=>{
 //asyncwrite();
 
 const asyncread = async()=>{
-    const FileData = await fs.readFile("./dataasync.csv","utf-8");
-    return FileData;
+    try{
+        const FileData = await fs.readFile("./dataasync.csv","utf-8");
+        console.log("File has been read successfully");
+        return FileData;
+    }catch(error){
+        console.log("error reading",error);
+    }
 }
+
+export default {asyncwrite,asyncread};
 
 const data = await asyncread();
 console.log(data);
