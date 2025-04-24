@@ -8,17 +8,19 @@ const user = {
     // "email":"ayush@gmail.com",
     // "pass":"1234"
 }
-app.get("/",async(req,res)=>{
-    try{
+app.get("/", async(req, res) => {
+    try {
         const data = await rw.readFile();
+        console.log("Sending response:", data);
         res.status(data.status).json({
-            "data":data.data,
-            "message":data.message
+            "data": data.data,
+            "message": data.message
         });
-    }catch(error){
-        res.status(200).json({
-            "Error":error
-        })
+    } catch(error) {
+        console.error("GET route error:", error);
+        res.status(500).json({
+            "Error": error.message
+        });
     }
 });
 app.use(express.json());
