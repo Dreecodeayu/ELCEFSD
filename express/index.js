@@ -3,12 +3,12 @@ import rw from './rw.js';
 console.log(rw.readFile());
 
 const app = express();
-const user = {
-    // "name":"Ayush",
-    // "email":"ayush@gmail.com",
-    // "pass":"1234"
-}
-app.get("/", async(req, res) => {
+// const user = {
+//     // "name":"Ayush",
+//     // "email":"ayush@gmail.com",
+//     // "pass":"1234"
+// }
+app.get("/user", async(req, res) => {
     try {
         const data = await rw.readFile();
         console.log("Sending response:", data);
