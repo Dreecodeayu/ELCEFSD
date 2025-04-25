@@ -19,13 +19,26 @@ const readFile = async() => {
 }
 
 const writeFile = async (data) => {
+    let message = "";
+    let status = 500;
+    let data = [];
+
     try {
-        await fs.writeFile("./data.json", JSON.stringify(data, null, 2), 'utf-8');
-        console.log("File has been written successfully");
-    } catch(error) {
-        console.log("Unable to write file", error);
-        throw error; // Re-throw to handle in the route
+        const result = await readFile(); 
+        data = Array.isArray(result.data) ? result.data : [];
+
+        data.push(newData); 
+
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+
+        message = "File has been written successfully.";
+        status = 200;
+    } catch (error) {
+        message = "Write error";
+        data = { error: error.message };
     }
+
+    return { data, status, message };
 }
 
 export default {readFile, writeFile};
